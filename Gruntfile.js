@@ -51,6 +51,9 @@ module.exports = function(grunt) {
         concat : {
             js : {
                 src: [
+                    'js/TableModel.js',
+                    'js/TableView.js',
+                    'js/TableControler.js',
                     'js/app.js'
                 ],
                 dest: 'js/prod/scripts.js'
