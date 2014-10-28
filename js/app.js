@@ -2,9 +2,7 @@
     'use strict';
 
     var App = function App() {
-        var _this = this instanceof App ? this : Object.create(App.prototype);
-
-
+        this.controller = new window.TableController();
     };
 
     window.app = new App();

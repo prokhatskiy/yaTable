@@ -53,7 +53,8 @@ module.exports = function(grunt) {
                 src: [
                     'js/TableModel.js',
                     'js/TableView.js',
-                    'js/TableControler.js',
+                    'js/TableController.js',
+                    'js/pubsub.js',
                     'js/app.js'
                 ],
                 dest: 'js/prod/scripts.js'
