@@ -9,3 +9,25 @@
 .table
     width: 100%
     table-layout: fixed
+    border-collapse: collapse
+    
+    &__cell,
+    &__head-cell
+        padding: 10px
+        border: 1px solid #000
+
+    &__head-cell
+        cursor: pointer
+        text-align: left
+
+    &__cell
+        color: blue
+
+    &__cell-minus
+        color: red
+
+    &__cell_up
+        color: green
+
+    &__cell_down
+        color: red

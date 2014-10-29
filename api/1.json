@@ -1,6 +1,28 @@
 {
-    "response" : [
-        [3, 22,   3,    132,    1323112],
+    "header" : [
+        {
+            "title" : "Первая",
+            "isSortable" : "true"
+        },
+        {
+            "title" : "Вторая",
+            "isSortable" : "true"
+        },
+        {
+            "title" : "Третья",
+            "isSortable" : "true"
+        },
+        {
+            "title" : "Четвертая",
+            "isSortable" : "true"
+        },
+        {
+            "title" : "Пятая",
+            "isSortable" : "true"
+        }
+    ],
+    "data" : [
+        [3, 22,   3,    132,    13.23112],
         [3, 3214, 3,    132,    312],
         [2, 341,  false,    123,    132],
         [4, 3213, 3213, 123132, -123],

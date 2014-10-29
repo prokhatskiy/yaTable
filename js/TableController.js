@@ -4,11 +4,12 @@
     var DEFAULTS = {
         SELECTORS : {
             LOAD_MORE_CLS : 'load-more-btn',
-            SORT_TABLE_TOGGLER_CLS : 'table__cell_header'
+            SORT_TABLE_TOGGLER_CLS : 'table__head-cell'
         },
         EVENTS : {
             MODEL_CHANGED : 'model:changed',
-            MODEL_FETCH : 'model:fetch'
+            MODEL_FETCH : 'model:fetch',
+            MODEL_SORT : 'model:sort'
         }
     };
 
@@ -34,7 +35,8 @@
             this.loadMore();
         }
         else if(el.classList.contains(DEFAULTS.SELECTORS.SORT_TABLE_TOGGLER_CLS)) {
-            this.sortTable(el.getAttribute('data-num'), el.getAttribute('data-dimension'));
+
+            this.sortTable(el.getAttribute('data-num'), el.getAttribute('data-direction'));
         }
 
         event.preventDefault();
@@ -44,8 +46,10 @@
         window.events.trigger(DEFAULTS.EVENTS.MODEL_FETCH);
     };
 
-    TableController.prototype.sortTable = function sortTable(num, dimention) {
-        alert('Sort!');
+    TableController.prototype.sortTable = function sortTable(num, direction) {
+        var direction = parseInt(direction);
+        var newDirection = (direction === 0) ? 1 : direction*(-1);
+        window.events.trigger(DEFAULTS.EVENTS.MODEL_SORT, { direction : newDirection, num : num });
     };
 
     window.TableController = TableController;
