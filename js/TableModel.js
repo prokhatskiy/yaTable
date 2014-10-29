@@ -65,9 +65,7 @@
             }
 
             _this.data.sortParams = _this.sortParams;
-
             window.events.trigger(DEFAULTS.EVENTS.MODEL_CHANGED);
-
             _this.page++;
         };
 

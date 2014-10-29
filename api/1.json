@@ -1,4 +1,5 @@
 {
+    "type" : "yaTableData",
     "header" : [
         {
             "title" : "Первая",
