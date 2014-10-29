@@ -2,7 +2,7 @@
     'use strict';
 
     var DEFAULTS = {
-        SERVICE_URL : '/api/1.json',
+        SERVICE_URL : '/api/table',
         EVENTS : {
             MODEL_CHANGED : 'model:changed',
             MODEL_FETCH : 'model:fetch',

@@ -3,7 +3,7 @@ var config = require('./config.js');
 
 var dataGenerator = {
     cols : 10,
-    rows : 10000,
+    rows : 10,
     docName : config.DB.DOC,
     array : [],
     header : [],
@@ -11,11 +11,7 @@ var dataGenerator = {
     generate : function() {
         this.generateHeader();
         this.generateArray();
-        this.saveDataToDb({
-            type : 'yaTableData',
-            header : this.header,
-            data : this.array
-        });
+        this.saveDataToDb();
     },
 
     generateHeader : function() {
@@ -70,7 +66,7 @@ var dataGenerator = {
 
                 rowArr.push(value);
             }
-            this.array.push(rowArr);
+            this.array.push({ title : 'tableRow', array : rowArr });
             rowArr = [];
         }
 
@@ -78,9 +74,16 @@ var dataGenerator = {
     },
 
     saveDataToDb : function(data) {
+        var header = this.header,
+            array = this.array;
+
         new Db(function(db) {
-            this.save(db, data, function() {
-                db.close();
+            var _this = this;
+
+            _this.saveHeader(db, header, function() {
+                _this.saveTable(db, array, function() {
+                    db.close();
+                });
             });
         });
     }
