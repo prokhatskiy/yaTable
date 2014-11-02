@@ -2,17 +2,18 @@ yaTable
 =======
 
 Запуск
-
-$ npm install
-$ npm start
+```
+npm install
+npm start
+```
 
 Данные загружаются из удаленной базы данных MongoDB, возможно использовать локальную базу данных. 
 Для этого надо изменить настройки в файле /api/config.js. 
 
 Базу можно заполнить случайными данными выполнив
-
-$ node ./api/generateData.js
-
+```
+node ./api/generateData.js
+```
 
 
 
