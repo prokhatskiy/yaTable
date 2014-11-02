@@ -3,6 +3,9 @@
     "version": "0.1.0",
     "description": "Version by 27.10.14",
     "private": true,
+    "scripts": {
+        "start": "node ./app.js"
+    },
     "devDependencies": {
         "grunt": "~0.4.2",
         "grunt-contrib-stylus": "~0.12.0",
