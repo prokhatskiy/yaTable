@@ -4,6 +4,7 @@ var fs = require('fs');
 
 var server = new Server();
 
+//Ugly server for static files
 server.on('/', function(params, req, res) {
     res.writeHead(200, 'text/html');
     var fileStream = fs.createReadStream('./public/index.html');
@@ -22,6 +23,7 @@ server.on('/css/styles.css', function(params, req, res) {
     fileStream.pipe(res);
 });
 
+//table service
 server.on('/api/table', function(params, req, res) {
     var page = params.split('page=')[1] || 0;
 

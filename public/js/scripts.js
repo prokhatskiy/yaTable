@@ -325,6 +325,8 @@
     window.TableController = TableController;
 })();
 ;(function () {
+    'use strict';
+
     var events = {};
     events.observers = {};
 
