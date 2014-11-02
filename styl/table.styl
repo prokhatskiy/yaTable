@@ -1,19 +1,13 @@
-.load-more-btn
-    position: fixed
-    bottom: 10px
-    width: 200px
-    height: 30px
-    left: 50%
-    margin-left: -100px
-
 .table
-    width: 100%
+    width: 990px;
+    margin: 50px auto;
+    font-size: 10px;
     table-layout: fixed
     border-collapse: collapse
     
     &__cell,
     &__head-cell
-        padding: 10px
+        padding: 2px
         border: 1px solid #000
 
     &__head-cell
@@ -28,6 +22,10 @@
 
     &__cell_up
         color: green
+        &:after
+            content: '↑'
 
     &__cell_down
         color: red
+        &:after
+            content: '↓'

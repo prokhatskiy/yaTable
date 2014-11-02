@@ -6,7 +6,9 @@
         EVENTS : {
             MODEL_CHANGED : 'model:changed',
             MODEL_FETCH : 'model:fetch',
-            MODEL_SORT : 'model:sort'
+            MODEL_SORT : 'model:sort',
+            LOADING_START : 'loading:start',
+            LOADING_END : 'loading:end'
         }
     };
 
@@ -27,6 +29,7 @@
             };
         }
 
+        window.events.trigger(DEFAULTS.EVENTS.LOADING_START);
         this.fetch();
         this.bindEvents();
     };
@@ -38,6 +41,7 @@
     };
 
     TableModel.prototype.fetch = function fetch() {
+        window.events.trigger(DEFAULTS.EVENTS.LOADING_START);
         var xhr = new XMLHttpRequest();
         var _this = this;
         xhr.open('GET', DEFAULTS.SERVICE_URL + '?page=' + this.page);
@@ -68,6 +72,7 @@
 
             _this.data.sortParams = _this.sortParams;
             window.events.trigger(DEFAULTS.EVENTS.MODEL_CHANGED);
+            window.events.trigger(DEFAULTS.EVENTS.LOADING_END);
             _this.page++;
         };
 
@@ -226,12 +231,15 @@
     var DEFAULTS = {
         SELECTORS : {
             LOAD_MORE_CLS : 'load-more-btn',
-            SORT_TABLE_TOGGLER_CLS : 'table__head-cell'
+            SORT_TABLE_TOGGLER_CLS : 'table__head-cell',
+            LOADING_CLASS : 'loading'
         },
         EVENTS : {
             MODEL_CHANGED : 'model:changed',
             MODEL_FETCH : 'model:fetch',
-            MODEL_SORT : 'model:sort'
+            MODEL_SORT : 'model:sort',
+            LOADING_START : 'loading:start',
+            LOADING_END : 'loading:end'
         }
     };
 
@@ -242,6 +250,14 @@
     };
 
     TableController.prototype.bindEvents = function bindEvents() {
+        window.events.subscribe(DEFAULTS.EVENTS.LOADING_START, function() {
+           document.body.classList.add(DEFAULTS.SELECTORS.LOADING_CLASS);
+        });
+
+        window.events.subscribe(DEFAULTS.EVENTS.LOADING_END, function() {
+            document.body.classList.remove(DEFAULTS.SELECTORS.LOADING_CLASS);
+        });
+
         window.events.subscribe(DEFAULTS.EVENTS.MODEL_CHANGED, function() {
             this.view.render(this.model);
         }.bind(this));
