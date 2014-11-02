@@ -21,7 +21,7 @@
 
     TableController.prototype.bindEvents = function bindEvents() {
         window.events.subscribe(DEFAULTS.EVENTS.MODEL_CHANGED, function() {
-            this.view.render(this.model.data);
+            this.view.render(this.model);
         }.bind(this));
 
         document.body.addEventListener('click', this.onClick.bind(this));

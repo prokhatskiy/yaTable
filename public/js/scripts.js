@@ -40,7 +40,7 @@
     TableModel.prototype.fetch = function fetch() {
         var xhr = new XMLHttpRequest();
         var _this = this;
-        xhr.open('GET', DEFAULTS.SERVICE_URL + '?page=' + this.page + '&sort=' + this.sortParams.num + '&sortDirection=' + this.sortParams.direction, true);
+        xhr.open('GET', DEFAULTS.SERVICE_URL + '?page=' + this.page);
 
         xhr.onreadystatechange = function() {
             var response;
@@ -55,12 +55,14 @@
 
             response = JSON.parse(this.responseText);
 
+            _this.header = response.header.value;
+
             if(_this.page === 0) {
-                _this.data = response;
+                _this.data = response.data;
             }
             else {
                 response.data.forEach(function(el) {
-                   _this.data.data.push(el);
+                   _this.data.push(el);
                 });
             }
 
@@ -123,7 +125,7 @@
         var tableFragment = document.createDocumentFragment(),
             column,
             rows = data.length,
-            cols = data[0].length,
+            cols = data[0].array.length,
             j, i, value, element;
 
         for(i = 0; i < rows; i++) {
@@ -131,7 +133,7 @@
             column.classList.add(DEFAULTS.TABLE.ROW.CLASS);
 
             for(j = 0; j < cols; j++) {
-                value = TableView.prototype.format(data[i][j]);
+                value = TableView.prototype.format(data[i].array[j]);
                 element = document.createElement(DEFAULTS.TABLE.CELL.TAG);
                 element.classList.add(DEFAULTS.TABLE.CELL.CLASS);
 
@@ -182,7 +184,6 @@
 
     var TableView = function TableView() {
         this.elem = document.body;
-        this.decimalsNum = 3;
     };
 
     TableView.prototype.render = function render(model) {
@@ -211,7 +212,7 @@
             }
         }
         else if(typeof value === 'number') {
-            value = parseFloat(value.toFixed(this.decimalsNum));
+            value = +value.toFixed(3);
         }
 
         return value;
@@ -242,7 +243,7 @@
 
     TableController.prototype.bindEvents = function bindEvents() {
         window.events.subscribe(DEFAULTS.EVENTS.MODEL_CHANGED, function() {
-            this.view.render(this.model.data);
+            this.view.render(this.model);
         }.bind(this));
 
         document.body.addEventListener('click', this.onClick.bind(this));

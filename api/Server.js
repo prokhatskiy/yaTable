@@ -1,6 +1,8 @@
 var http = require('http');
 var url = require('url');
 var config = require('./config.js');
+var path = require('path');
+var fs = require('fs');
 
 function Server() {
     this.start();
@@ -15,7 +17,8 @@ Server.prototype.start = function () {
 
 Server.prototype.onRequest = function(req, res) {
     var pathname = url.parse(req.url).pathname;
-    this.emmit(pathname, [req, res]);
+    var params = url.parse(req.url).query;
+    this.emmit(pathname, [params, req, res]);
 };
 
 Server.prototype.emmit = function(path, eventOptions, context) {

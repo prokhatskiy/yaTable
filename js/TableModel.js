@@ -40,7 +40,7 @@
     TableModel.prototype.fetch = function fetch() {
         var xhr = new XMLHttpRequest();
         var _this = this;
-        xhr.open('GET', DEFAULTS.SERVICE_URL + '?page=' + this.page + '&sort=' + this.sortParams.num + '&sortDirection=' + this.sortParams.direction, true);
+        xhr.open('GET', DEFAULTS.SERVICE_URL + '?page=' + this.page);
 
         xhr.onreadystatechange = function() {
             var response;
@@ -55,12 +55,14 @@
 
             response = JSON.parse(this.responseText);
 
+            _this.header = response.header.value;
+
             if(_this.page === 0) {
-                _this.data = response;
+                _this.data = response.data;
             }
             else {
                 response.data.forEach(function(el) {
-                   _this.data.data.push(el);
+                   _this.data.push(el);
                 });
             }
 

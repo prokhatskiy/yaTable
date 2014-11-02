@@ -33,7 +33,7 @@
         var tableFragment = document.createDocumentFragment(),
             column,
             rows = data.length,
-            cols = data[0].length,
+            cols = data[0].array.length,
             j, i, value, element;
 
         for(i = 0; i < rows; i++) {
@@ -41,7 +41,7 @@
             column.classList.add(DEFAULTS.TABLE.ROW.CLASS);
 
             for(j = 0; j < cols; j++) {
-                value = TableView.prototype.format(data[i][j]);
+                value = TableView.prototype.format(data[i].array[j]);
                 element = document.createElement(DEFAULTS.TABLE.CELL.TAG);
                 element.classList.add(DEFAULTS.TABLE.CELL.CLASS);
 
@@ -92,7 +92,6 @@
 
     var TableView = function TableView() {
         this.elem = document.body;
-        this.decimalsNum = 3;
     };
 
     TableView.prototype.render = function render(model) {
@@ -121,7 +120,7 @@
             }
         }
         else if(typeof value === 'number') {
-            value = parseFloat(value.toFixed(this.decimalsNum));
+            value = +value.toFixed(3);
         }
 
         return value;

@@ -45,13 +45,26 @@ Db.prototype.getTable = function(db, page, callback) {
             'title' : 'tableRow'
         },
         {
-            limit : (page + 1) * config.ITEMS_PER_PAGE,
-            skip : 0
+            limit : config.ITEMS_PER_PAGE,
+            skip : page*config.ITEMS_PER_PAGE
         },
         function(err, docs) {
             docs.toArray(function(err, docs) {
                 if(typeof callback === 'function') callback(docs);
             });
+        }
+    );
+};
+
+Db.prototype.getHeader = function(db, callback) {
+    var collection = db.collection(config.DB.DOC);
+
+    collection.findOne(
+        {
+            'title' : 'tableHeader'
+        },
+        function(err, doc) {
+            if(typeof callback === 'function') callback(doc);
         }
     );
 };

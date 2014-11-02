@@ -25,7 +25,7 @@ module.exports = function(grunt) {
                     urlfunc: 'embedurl'
                 },
                 files : {
-                    'css/styles.css': 'styl/styles.styl'
+                    'public/css/styles.css': 'styl/styles.styl'
                 }
             }
         },
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
                     'js/pubsub.js',
                     'js/app.js'
                 ],
-                dest: 'js/prod/scripts.js'
+                dest: 'public/js/scripts.js'
             }
         }
     });
@@ -68,5 +68,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', ['connect', 'open', 'stylus:css', 'concat:js', 'watch']);
+    grunt.registerTask('default', ['stylus:css', 'concat:js', 'watch']);
 };

@@ -1,7 +1,7 @@
 module.exports = function() {
     return {
         SERVER : {
-            PORT : 8888,
+            PORT : 9000,
         },
         DB : {
             SERVER : 'ds049170.mongolab.com:49170',

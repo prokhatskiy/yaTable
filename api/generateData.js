@@ -3,7 +3,7 @@ var config = require('./config.js');
 
 var dataGenerator = {
     cols : 10,
-    rows : 10,
+    rows : 100,
     docName : config.DB.DOC,
     array : [],
     header : [],
@@ -40,7 +40,7 @@ var dataGenerator = {
     },
 
     getRandomFloat : function(min, max) {
-        return Math.random() * (max - min + 1) + min;;
+        return Math.random() * (max - min + 1) + min;
     },
 
     getRandomBoolean : function() {
