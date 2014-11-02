@@ -2,6 +2,9 @@
     'use strict';
 
     var DEFAULTS = {
+        SELECTORS :{
+            SORTABLE_CLASS : 'table__cell_sortable'
+        },
         TABLE : {
             TAG : 'table',
             CLASS : 'table',
@@ -77,6 +80,10 @@
             }
             else {
                 element.setAttribute('data-direction', '0');
+            }
+
+            if(data[i].isSortable) {
+                element.classList.add(DEFAULTS.SELECTORS.SORTABLE_CLASS);
             }
 
             element.innerHTML = data[i].title;

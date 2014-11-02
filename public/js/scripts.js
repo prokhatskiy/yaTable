@@ -99,6 +99,9 @@
     'use strict';
 
     var DEFAULTS = {
+        SELECTORS :{
+            SORTABLE_CLASS : 'table__cell_sortable'
+        },
         TABLE : {
             TAG : 'table',
             CLASS : 'table',
@@ -176,6 +179,10 @@
                 element.setAttribute('data-direction', '0');
             }
 
+            if(data[i].isSortable) {
+                element.classList.add(DEFAULTS.SELECTORS.SORTABLE_CLASS);
+            }
+
             element.innerHTML = data[i].title;
             tableFragment.appendChild(element);
         }
@@ -231,7 +238,7 @@
     var DEFAULTS = {
         SELECTORS : {
             LOAD_MORE_CLS : 'load-more-btn',
-            SORT_TABLE_TOGGLER_CLS : 'table__head-cell',
+            SORT_TABLE_TOGGLER_CLS : 'table__cell_sortable',
             LOADING_CLASS : 'loading'
         },
         EVENTS : {

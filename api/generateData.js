@@ -18,7 +18,7 @@ var dataGenerator = {
         var value = {};
         this.header = [];
         for(var j = 0; j < this.cols; j++) {
-            if(j === this.rows - 1) {
+            if(j === this.cols - 1) {
                 value = {
                     title : 'Последняя ячейка',
                     isSortable : false

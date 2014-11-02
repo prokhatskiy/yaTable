@@ -4,7 +4,7 @@
     var DEFAULTS = {
         SELECTORS : {
             LOAD_MORE_CLS : 'load-more-btn',
-            SORT_TABLE_TOGGLER_CLS : 'table__head-cell',
+            SORT_TABLE_TOGGLER_CLS : 'table__cell_sortable',
             LOADING_CLASS : 'loading'
         },
         EVENTS : {
