@@ -30,7 +30,11 @@
         }
 
         window.events.trigger(DEFAULTS.EVENTS.LOADING_START);
-        this.fetch();
+
+        this.fetch(function() {
+            this.sort();
+        }.bind(this));
+
         this.bindEvents();
     };
 
@@ -40,7 +44,7 @@
         return this;
     };
 
-    TableModel.prototype.fetch = function fetch() {
+    TableModel.prototype.fetch = function fetch(callback) {
         window.events.trigger(DEFAULTS.EVENTS.LOADING_START);
         var xhr = new XMLHttpRequest();
         var _this = this;
@@ -71,9 +75,13 @@
             }
 
             _this.data.sortParams = _this.sortParams;
-            window.events.trigger(DEFAULTS.EVENTS.MODEL_CHANGED);
+            _this.sort();
             window.events.trigger(DEFAULTS.EVENTS.LOADING_END);
             _this.page++;
+
+            if(typeof callback === 'function') {
+                callback();
+            }
         };
 
         xhr.send(null);
@@ -82,6 +90,23 @@
     };
 
     TableModel.prototype.sort = function sort() {
+        var compare;
+
+        if(this.sortParams.direction > 0) {
+            compare = function(rowA, rowB) {
+                return rowA.array[this.sortParams.num] - rowB.array[this.sortParams.num];
+            }.bind(this);
+        }
+        else if(this.sortParams.direction < 0) {
+            compare = function(rowA, rowB) {
+                return -(rowA.array[this.sortParams.num] - rowB.array[this.sortParams.num]);
+            }.bind(this);
+        }
+        else {
+            return false;
+        }
+
+        this.data.sort(compare);
         window.events.trigger(DEFAULTS.EVENTS.MODEL_CHANGED);
         return this;
     };
